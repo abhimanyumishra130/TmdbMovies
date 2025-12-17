@@ -63,4 +63,12 @@ dependencies {
     implementation(libs.hilt.dagger.hilt.android)
     ksp(libs.hilt.dagger.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+
+
+    //Coil (AsyncImage)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
+    // Retrofit with Gson Converter
+    implementation(libs.retrofit.gson)
 }
