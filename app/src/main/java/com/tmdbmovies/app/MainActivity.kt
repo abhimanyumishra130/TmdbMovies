@@ -9,9 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.tmdbmovies.app.presentation.navigation.MainNavigation
 import com.tmdbmovies.app.presentation.screens.HomeScreen
 import com.tmdbmovies.app.presentation.ui.theme.TmdbMoviesTheme
 import com.tmdbmovies.app.presentation.viewmodel.MainViewModel
@@ -34,5 +38,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun InitiateUI(viewModel: MainViewModel = hiltViewModel()) {
-    HomeScreen(viewModel,{})
+
+    val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route ?: "home"
+    MainNavigation(
+        navController = navController,
+        startDestination = "home"
+    )
 }
