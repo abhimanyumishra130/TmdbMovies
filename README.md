@@ -1,80 +1,47 @@
-🎬 Movie App – Android Assignment
+# 🎬 Movie App – Android Assignment
 
-This is an Android movie browsing app built using Kotlin and Jetpack Compose as part of the Atlys Android Engineer Assignment.
+This Android application is built using Kotlin and Jetpack Compose as part of the Atlys Android Engineer Assignment. The app fetches trending movies from the TMDB API, supports searching, and displays movie details based on user selection.
 
-📱 Overview
-The app allows users to:
-View a list of trending movies \n
-Search movies\n
-Open a detailed screen for any selected movie\n
-View movie posters + info using TMDB\n
-Access cached movies offline
-Experience loading, error and empty UI states
+---
 
-🎯 Features
+## 📱 Overview
 
-Trending movies list (20 items)
-Search support
-Movie details screen
-Cached offline support
-Image loading from TMDB
-Compose Navigation
-Proper app states:
-Loading
-Error
-Empty
+- Displays a list of trending movies.
+- Opens a detailed screen when a movie is selected.
+- Includes search functionality for movie exploration.
+- Uses TMDB API for movies and posters.
+- Supports offline access by caching trending movies.
+- Shows loading, empty, and error states.
 
-🛠 Tech Stack
+---
 
-Kotlin
-Jetpack Compose
-Compose Navigation
-Retrofit / OkHttp (or preferred networking)
-Coil / Glide for images
-Room / DataStore for caching
-Coroutines + Flow
-Clean Architecture (simple)
+## 🎯 Features
 
-🚀 API Used
+- Trending movies list (20 items)
+- Search support
+- Movie detail screen
+- Offline caching support
+- Image fetching from TMDB
+- Compose Navigation
+- Loading / Empty / Error states
 
-Trending Movies API
-https://api.themoviedb.org/3/trending/movie/week?language=en-US&api_key=YOUR_KEY
+---
 
-Image Fetching
+## 🛠 Tech Stack
 
-https://image.tmdb.org/t/p/w500/<image_path>
+- Kotlin  
+- Jetpack Compose  
+- Compose Navigation  
+- Retrofit / OkHttp  
+- Coil (or any image loader)  
+- Coroutines + Flow  
+- Room / DataStore  
 
+---
 
-You must generate an API Key from TMDB.
+## 🚀 API Used
 
-🧱 Architecture
-
-MVVM + Clean-ish architecture
-
-Layers:
-
-data → API + cache
-domain → repository + use cases
-presentation → ViewModel + UI
-
-📂 Project Structure (example)
-app/
- ├─ data/
- ├─ domain/
- ├─ presentation/
- ├─ core/
-
-🧪 Screens Implemented
-
-Movie List Screen
-Search UI
-Detail Screen
-Loading
-Error
-Empty
-Offline cached view
-
-🎥 Demo Recording
+Trending Movies API:
 
 https://github.com/user-attachments/assets/8d691216-00ac-4b58-ab7e-1565682ee45b
 
