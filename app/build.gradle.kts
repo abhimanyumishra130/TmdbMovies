@@ -69,6 +69,11 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
 
+
+    //Retrofit
+    implementation(libs.retrofit)
+    // Retrofit with Scalar Converter
+    implementation(libs.converter.scalars)
     // Retrofit with Gson Converter
     implementation(libs.retrofit.gson)
 }

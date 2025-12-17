@@ -11,7 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.tmdbmovies.app.presentation.screens.HomeScreen
 import com.tmdbmovies.app.presentation.ui.theme.TmdbMoviesTheme
+import com.tmdbmovies.app.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,10 +25,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             TmdbMoviesTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    InitiateUI()
                 }
             }
         }
@@ -33,17 +33,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TmdbMoviesTheme {
-        Greeting("Android")
-    }
+fun InitiateUI(viewModel: MainViewModel = hiltViewModel()) {
+    HomeScreen(viewModel,{})
 }
