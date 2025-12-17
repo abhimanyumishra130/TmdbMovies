@@ -33,4 +33,14 @@ class MainViewModel @Inject constructor(val fetchMoviesUseCase: FetchMoviesUseCa
         }
     }
 
+    fun searchMovies(query: String) {
+        val currentMovies = _movies.value
+        if (currentMovies != null) {
+            val filteredMovies = currentMovies.filter {
+                it.title.contains(query, ignoreCase = true)
+            }
+            _movies.value = filteredMovies
+        }
+    }
+
 }

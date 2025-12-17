@@ -76,4 +76,8 @@ dependencies {
     implementation(libs.converter.scalars)
     // Retrofit with Gson Converter
     implementation(libs.retrofit.gson)
+
+    //Room
+    implementation (libs.room.runtime )
+    ksp(libs.room.compiler)
 }

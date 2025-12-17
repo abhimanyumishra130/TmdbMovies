@@ -14,9 +14,14 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -28,23 +33,41 @@ import com.tmdbmovies.app.presentation.viewmodel.MainViewModel
 fun HomeScreen(viewModel: MainViewModel, onItemClick: (Int) -> Unit = {}) {
     Log.d("TAG", "HomeScreens: ")
     val result by viewModel.movies.collectAsState()
-    LazyVerticalGrid(
+    var searchQuery by remember { mutableStateOf("") }
+    Column(
         modifier = Modifier
         .fillMaxSize()
         .background(Color.White)
-        .padding(20.dp,60.dp,20.dp,0.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        columns = GridCells.Fixed(2)
+        .padding(top = 60.dp)
     ) {
-        result?.let {
-            items(it.size){ ind ->
-                val url = MoviePosterUtils.getFullPosterUrl(it[ind].posterPath)
-                val title = it[ind].title
-                MovieModel(url, title, onItemClick = { onItemClick(ind) })
+        TextField(
+            value = searchQuery,
+            onValueChange = { searchQuery = it },
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            placeholder = { Text(text = "Search Movies") }
+        )
+        LazyVerticalGrid(
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            columns = GridCells.Fixed(2),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(10.dp)
+        ) {
+            result?.let {
+                items(it.size){ ind ->
+                    val url = MoviePosterUtils.getFullPosterUrl(it[ind].posterPath)
+                    val title = it[ind].title
+                    MovieModel(url, title, onItemClick = { onItemClick(ind) })
+                }
             }
         }
 
+        LaunchedEffect(searchQuery) {
+            viewModel.searchMovies(searchQuery)
+        }
     }
 }
 
