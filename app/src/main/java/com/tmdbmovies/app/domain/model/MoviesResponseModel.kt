@@ -48,5 +48,11 @@ data class MovieModel(
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("voteAverage")
-    val voteAverage: Double
+    val voteAverage: Double,
+    @SerializedName("backdrop_path")
+    val backdropPath: String,
+    @SerializedName("vote_count")
+    val voteCount: Int,
+    @SerializedName("popularity")
+    val popularity: Double
 )

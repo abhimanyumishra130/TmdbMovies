@@ -32,7 +32,7 @@ import com.tmdbmovies.app.presentation.viewmodel.MainViewModel
 @Composable
 fun HomeScreen(viewModel: MainViewModel, onItemClick: (Int) -> Unit = {}) {
     Log.d("TAG", "HomeScreens: ")
-    val result by viewModel.movies.collectAsState()
+    val result by viewModel.movies.collectAsState(null)
     var searchQuery by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
@@ -58,9 +58,10 @@ fun HomeScreen(viewModel: MainViewModel, onItemClick: (Int) -> Unit = {}) {
         ) {
             result?.let {
                 items(it.size){ ind ->
-                    val url = MoviePosterUtils.getFullPosterUrl(it[ind].posterPath)
-                    val title = it[ind].title
-                    MovieModel(url, title, onItemClick = { onItemClick(ind) })
+                    val movie = it[ind]
+                    val url = MoviePosterUtils.getFullPosterUrl(movie.posterPath)
+                    val title = movie.title
+                    MovieModel(url, title, onItemClick = { onItemClick(movie.id) })
                 }
             }
         }

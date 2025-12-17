@@ -2,6 +2,7 @@ package com.tmdbmovies.app.core.di
 
 import android.content.Context
 import androidx.room.Room
+import com.tmdbmovies.app.data.local.dao.MoviesDao
 import com.tmdbmovies.app.data.local.database.MoviesDatabase
 import dagger.Module
 import dagger.Provides
@@ -23,5 +24,5 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideMoviesDao(database: MoviesDatabase) = database.getMoviesDao()
+    fun provideMoviesDao(database: MoviesDatabase): MoviesDao = database.getMoviesDao()
 }

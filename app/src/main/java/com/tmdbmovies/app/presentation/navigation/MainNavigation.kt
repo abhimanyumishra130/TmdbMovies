@@ -30,7 +30,7 @@ fun MainNavigation(
         }
 
         composable("details/{movieId}"){
-            MovieDetailsScreen(index = it.arguments?.getString("movieId")?.toInt(), mainViewModel)
+            MovieDetailsScreen(id = it.arguments?.getString("movieId")?.toInt(), mainViewModel)
         }
     }
 }

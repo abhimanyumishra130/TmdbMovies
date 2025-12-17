@@ -5,15 +5,16 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.tmdbmovies.app.data.local.Entity.MovieDetailsEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MoviesDao {
 
     @Query("SELECT * FROM movie_details")
-    fun fetchMovies(): List<MovieDetailsEntity>
+    fun fetchMovies(): Flow<List<MovieDetailsEntity>>
 
     @Query("SELECT * FROM movie_details WHERE title LIKE '%' || :query || '%'")
-    fun searchMovies(query: String): List<MovieDetailsEntity>
+    fun searchMovies(query: String): Flow<List<MovieDetailsEntity>>
 
     @Insert
     suspend fun insertMovies(movies: List<MovieDetailsEntity>)
