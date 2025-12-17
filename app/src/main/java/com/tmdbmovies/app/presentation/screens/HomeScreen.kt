@@ -23,19 +23,19 @@ import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.tmdbmovies.app.core.utils.MoviePosterUtils
 import com.tmdbmovies.app.presentation.viewmodel.MainViewModel
-import kotlin.collections.get
+
 @Composable
 fun HomeScreen(viewModel: MainViewModel, onItemClick: (Int) -> Unit = {}) {
     Log.d("TAG", "HomeScreens: ")
     val result by viewModel.movies.collectAsState()
     LazyVerticalGrid(
-    modifier = Modifier
-    .fillMaxSize()
-    .background(Color(0xffffffff))
-    .padding(20.dp),
-    verticalArrangement = Arrangement.spacedBy(12.dp),
-    horizontalArrangement = Arrangement.spacedBy(12.dp),
-    columns = GridCells.Fixed(2)
+        modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White)
+        .padding(20.dp,60.dp,20.dp,0.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        columns = GridCells.Fixed(2)
     ) {
         result?.let {
             items(it.size){ ind ->
