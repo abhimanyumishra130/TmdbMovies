@@ -4,10 +4,10 @@ This is an Android movie browsing app built using Kotlin and Jetpack Compose as 
 
 📱 Overview
 The app allows users to:
-View a list of trending movies
-Search movies
-Open a detailed screen for any selected movie
-View movie posters + info using TMDB
+View a list of trending movies \n
+Search movies\n
+Open a detailed screen for any selected movie\n
+View movie posters + info using TMDB\n
 Access cached movies offline
 Experience loading, error and empty UI states
 
