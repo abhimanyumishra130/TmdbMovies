@@ -35,7 +35,7 @@ This Android application is built using Kotlin and Jetpack Compose as part of th
 - Retrofit / OkHttp  
 - Coil (or any image loader)  
 - Coroutines + Flow  
-- Room / DataStore  
+- Room   
 
 ---
 
