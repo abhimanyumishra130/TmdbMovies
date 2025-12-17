@@ -41,7 +41,39 @@ This Android application is built using Kotlin and Jetpack Compose as part of th
 
 ## 🚀 API Used
 
-Trending Movies API:
+https://api.themoviedb.org/3/trending/movie/week?language=en-US&api_key=YOUR_KEY
 
+
+TMDB Image Base URL:
+
+https://image.tmdb.org/t/p/w500/
+
+
+Register with TMDB to generate an API key.
+
+---
+
+## 🧱 Architecture
+
+- MVVM + simple clean architecture
+- Layers:
+  - data → API + caching
+  - domain → repository + use cases
+  - presentation → ViewModel + UI
+
+---
+
+## 📂 Project Structure (Example)
+
+app/
+├─ data/
+├─ domain/
+├─ presentation/
+├─ di/
+└─ utils/
+
+---
+
+## 🎥 App Demo
 https://github.com/user-attachments/assets/8d691216-00ac-4b58-ab7e-1565682ee45b
 
