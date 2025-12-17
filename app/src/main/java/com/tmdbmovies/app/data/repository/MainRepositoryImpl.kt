@@ -19,6 +19,7 @@ class MainRepositoryImpl @Inject constructor(val mainService: MainService, val m
         // Implementation goes here
         val result =  mainService.fetchMovies()
         result.results?.let {
+            deleteAllMovies()
             insertMovies(it)
         }
         return result

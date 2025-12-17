@@ -13,9 +13,13 @@ import com.tmdbmovies.app.domain.usecase.SearchMoviesUseCase
 import com.tmdbmovies.app.presentation.state.MainUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.WhileSubscribed
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,15 +34,20 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
 private val searchQuery = MutableStateFlow("")
-    private val _movies = searchQuery.flatMapLatest {
-        query ->
-        if (query.isEmpty()) {
-            fetchMoviesFromDbUseCase()
-        } else {
-            searchMoviesUseCase(query)
-        }
-    }
-    val movies = _movies
+     val movies: StateFlow<List<MovieModel>> = searchQuery
+         .debounce(300)
+         .flatMapLatest { query ->
+                if (query.isEmpty()) {
+                    fetchMoviesFromDbUseCase()
+                } else {
+                    searchMoviesUseCase(query)
+                }
+            }.stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5000),
+                emptyList()
+            )
+
 
     private val _uiState = MutableStateFlow<MainUiState>(MainUiState.Idle)
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
@@ -67,7 +76,15 @@ private val searchQuery = MutableStateFlow("")
             if (!networkUtils.isNetworkAvailable()) {
                 Log.d("TAG", "fetchMovies: No network available")
                 shouldRetryOnConnection = true
-//                _uiState.emit(MainUiState.Error("No internet connection available"))
+                val data = fetchMoviesFromDbUseCase()
+                data.collect {
+                    Log.d("TAG", "fetchMovies: data $it ${it.isNotEmpty()}")
+                    if (it.isNotEmpty()){
+                        _uiState.emit(MainUiState.Success(it))
+                    } else {
+                        _uiState.emit(MainUiState.Error("No internet connection and no data available offline"))
+                    }
+                }
                 return@launch
             }
 
