@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun InitiateUI(viewModel: MainViewModel = hiltViewModel()) {
+fun InitiateUI() {
 
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
