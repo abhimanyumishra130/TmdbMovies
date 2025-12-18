@@ -93,13 +93,8 @@ private val searchQuery = MutableStateFlow("")
             Log.d("TAG", "fetchMovies: Loading started")
             try {
                 val result = fetchMoviesUseCase()
-//
-//                Log.d("TAG", "fetchMovies: ${result.results}")
-//                _movies.emit(result.results)
                 _uiState.emit(MainUiState.Success(result.results))
                 shouldRetryOnConnection = false
-//                val result = fetchMoviesFromDbUseCase()
-//                _movies.emit(result)
             }catch (e: Exception) {
                 // Handle error
                 _uiState.emit(MainUiState.Error(e.message ?: "Unknown error occurred"))
@@ -110,8 +105,6 @@ private val searchQuery = MutableStateFlow("")
     }
 
     fun searchMovies(query: String) {
-        // Implementation goes here
-        // You can implement search functionality here if needed
         searchQuery.value = query
     }
 
